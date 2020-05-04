@@ -1,6 +1,5 @@
 const api_url = 'https://api.covid19india.org/data.json';
-let x = 92;
-let flag = 0;
+
 function getData() {
     fetch(api_url).then(function(response) {
         return response.json();
