@@ -15,22 +15,40 @@
   <body>
 
     <center>
-      <h1><img src="iconfinder_01-Virus_5929243.png"> Coronavirus India</h1><hr style="border: 1px solid black;">
+      <h1><img src="iconfinder_01-Virus_5929243.png"> Coronavirus Live</h1><hr style="border: 1px solid black;">
       <i class="fas fa-virus"></i>
-      <h2>Total Cases</h1>
-      <h3 id="totcases" style="color: blue;"></h1>
-      <h2>Total Recovered</h1>
-      <h3 id="totrecov" style="color:chartreuse;"></h1>
-      <h2>Total Deaths</h1>
-      <h3 id="totdeaths" style="color: crimson;"></h1>
-      <br>
+      <div class="col-md-6" style="float: left;">
+        <center>
+          <h1 style="color: darkblue;">GLOBAL</h1>
+          <hr>
+          <h2>Total Cases</h1>
+          <h3 id="totcasesg" style="color: blue;"></h1>
+          <h2>Total Recovered</h1>
+          <h3 id="totrecovg" style="color:chartreuse;"></h1>
+          <h2>Total Deaths</h1>
+          <h3 id="totdeathsg" style="color: crimson;"></h1>
+        </center>
+      </div>
+      <div class="col-md-6" style="float: right;">
+        <center>
+          <h1 style="color: darkblue;">INDIA</h1>
+          <hr>
+          <h2>Total Cases</h1>
+          <h3 id="totcases" style="color: blue;"></h1>
+          <h2>Total Recovered</h1>
+          <h3 id="totrecov" style="color:chartreuse;"></h1>
+          <h2>Total Deaths</h1>
+          <h3 id="totdeaths" style="color: crimson;"></h1>
+        </center>
+      </div>
+
       <p id="updatetime" style="color: black;"></p>
-      <p style="color: black;">stats will update everyday at midnight</p>
+      <p style="color: black;"></p>
       <h1 style="color: orangered;" id="err"></h1>
       <h1 style="color: orangered;" id="err2"></h1>
     </center>
     <!-- Optional JavaScript -->
-    <script src="app.js"></script>
+    <script src="app1.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
