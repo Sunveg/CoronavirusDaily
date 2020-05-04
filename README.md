@@ -1,3 +1,3 @@
 # CoronavirusDaily
 
-This gives the daily CoronaVirus Stats and uses the government Covid19 api.
+This gives the daily CoronaVirus Stats and uses the Covid19 live api.
