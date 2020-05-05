@@ -40,7 +40,60 @@ function getDatag() {
     //document.getElementById('totdeaths').textContent = obj.cases_time_series.totaldeceased;
 }
 
+async function getCSV() {
+    const response = await fetch('world.csv');
+    const datacsv = await response.text();
+
+    const table = datacsv.split('\n').slice(1);
+    table.forEach(row => {
+        const col = row.split(',');
+        const date = col[0];
+        const cases = col[1];
+        xlabels.push(date);
+        ylabels.push(cases);
+        console.log(date, cases);
+    })
+}
+
 getData();
 getDatag()
+
+const xlabels = [];
+const ylabels = [];
+
+createChart();
+
+async function createChart() {
+    await getCSV();
+    const ctx = document.getElementById('chart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: xlabels,
+            datasets: [{
+                label: 'Coronavirus Cases- Global',
+                data: ylabels,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+}
+
 
 //https://coronavirus-19-api.herokuapp.com/countries/India

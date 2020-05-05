@@ -13,7 +13,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@423&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Corona shit</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+    <title>Corona Update</title>
   </head>
   <body>
 
@@ -23,7 +25,7 @@
       <i class="fas fa-virus"></i>
       <div class="container">
         <div class="row">
-          <div class="col" style="margin: 40px; padding: 25px; border: 1px solid rgb(168, 167, 167);padding: 10px;">
+          <div class="col" id="box-global" style="margin: 40px; padding: 25px; border: 1px solid rgb(168, 167, 167);padding: 10px;">
             <h5 style="font-family: 'Indie Flower', cursive;
             font-family: 'Arvo', serif;color: darkblue;letter-spacing: 0.1em;margin: 10px;">GLOBAL</h5>
             <hr>
@@ -45,7 +47,7 @@
             </div>
           </div>
 
-          <div class="col" style="margin: 40px; padding: 25px; border: 1px solid rgb(168, 167, 167);padding: 10px;">
+          <div class="col" id="box-india" style="margin: 40px; padding: 25px; border: 1px solid rgb(168, 167, 167);padding: 10px;">
             <h5 style="font-family: 'Indie Flower', cursive;
             font-family: 'Arvo', serif;color: darkblue;letter-spacing: 0.1em;margin: 10px;">INDIA</h5>
             <hr>
@@ -68,6 +70,7 @@
           </div>
         </div>
       </div>
+      <canvas id="chart" width="800" height="400"></canvas>
       <img src="stayhome.gif" alt="stayhome" style="width: 300px;height: 300px;">
       
       
@@ -77,14 +80,8 @@
       <h1 style="color: orangered;" id="err2"></h1>
     </center>
     
-    <i class="fas fa-head-side-mask"></i>
-    <i class="fas fa-head-side-cough-slash"></i>
-    <i class="far fa-hospital"></i>
-    <i class="fas fa-user-md"></i>
-    <i class="fas fa-ambulance"></i>
-    <i class="fas fa-virus-slash"></i>
-    <i class="fas fa-allergies"></i>
-
+    
+    
     <!-- Optional JavaScript -->
     <script src="app1.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
