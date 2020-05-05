@@ -113,7 +113,7 @@ async function createChart() {
             }]
         },
         options: {
-            responsive: false,
+            responsive: true,
             scales: {
                 yAxes: [{
                     ticks: {
@@ -145,7 +145,7 @@ async function createChart2() {
             }]
         },
         options: {
-            responsive: false,
+            responsive: true,
             scales: {
                 yAxes: [{
                     ticks: {
