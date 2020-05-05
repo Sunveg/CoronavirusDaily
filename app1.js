@@ -6,8 +6,11 @@ function getData() {
     }).then(function(data) {
         
         document.getElementById('totcases').textContent = data.cases;
+        mylist.push(data.cases);
         document.getElementById('totrecov').textContent = data.recovered;
+        mylist.push(data.recovered);
         document.getElementById('totdeaths').textContent = data.deaths;
+        mylist.push(data.deaths);
         //document.getElementById('updatetime').textContent = 'last updated: ' + data.cases_time_series[pos - 1].date + ' 11:59 pm';
     })
     .catch(function(error) {
@@ -26,8 +29,11 @@ function getDatag() {
     }).then(function(datag) {
         
         document.getElementById('totcasesg').textContent = datag.cases;
+        mylistg.push(datag.cases);
         document.getElementById('totrecovg').textContent = datag.recovered;
+        mylistg.push(datag.recovered);
         document.getElementById('totdeathsg').textContent = datag.deaths;
+        mylistg.push(datag.deaths);
         //document.getElementById('updatetime').textContent = 'last updated: ' + data.cases_time_series[pos - 1].date + ' 11:59 pm';
     })
     .catch(function(error) {
@@ -51,17 +57,41 @@ async function getCSV() {
         const cases = col[1];
         xlabels.push(date);
         ylabels.push(cases);
-        console.log(date, cases);
+        //console.log(date, cases);
     })
 }
+
+async function getCSV2() {
+    const response = await fetch('india_small.csv');
+    const datacsv2 = await response.text();
+
+    const table2 = datacsv2.split('\n').slice(1);
+    table2.forEach(row2 => {
+        const col2 = row2.split(',');
+        const date2 = col2[0];
+        const cases2 = col2[2];
+        xlabels2.push(date2);
+        ylabels2.push(cases2);
+        //console.log(date2, cases2);
+    })
+}
+
+
 
 getData();
 getDatag()
 
 const xlabels = [];
 const ylabels = [];
+const xlabels2 = [];
+const ylabels2 = [];
+const mylist = [];
+const mylistg = [];
 
 createChart();
+createChart2();
+DoughnutChart();
+DoughnutChartg();
 
 async function createChart() {
     await getCSV();
@@ -71,7 +101,7 @@ async function createChart() {
         data: {
             labels: xlabels,
             datasets: [{
-                label: 'Coronavirus Cases- Global',
+                label: 'Total Cases- Global',
                 data: ylabels,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)'
@@ -83,7 +113,7 @@ async function createChart() {
             }]
         },
         options: {
-            responsive: true,
+            responsive: false,
             scales: {
                 yAxes: [{
                     ticks: {
@@ -93,6 +123,108 @@ async function createChart() {
             }
         }
     });
+}
+
+async function createChart2() {
+    await getCSV2();
+    const ctx = document.getElementById('chart2').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: xlabels2,
+            datasets: [{
+                label: 'Total Cases- India',
+                data: ylabels2,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: false,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+}
+
+async function DoughnutChart() {
+    var ctx = document.getElementById('chartD1').getContext('2d');
+    var myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Total confirmed', 'Recovered', 'Deaths'],
+        datasets: [{
+            label: 'Till 4 May',
+            data: mylist,
+            backgroundColor: [
+                'rgba(0, 0, 255, 0.5)',
+                'rgba(0, 255, 0, 0.5)',
+                'rgba(255, 0, 0, 0.5)'
+            ],
+            borderColor: [
+                'rgba(0, 0, 255, 0.5)',
+                'rgba(0, 255, 0, 0.5)',
+                'rgba(255, 0, 0, 0.5)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: false,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+}
+
+async function DoughnutChartg() {
+    var ctx = document.getElementById('chartD2').getContext('2d');
+    var myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Total confirmed', 'Recovered', 'Deaths'],
+        datasets: [{
+            label: 'Till 4 May',
+            data: mylistg,
+            backgroundColor: [
+                'rgba(0, 0, 255, 0.5)',
+                'rgba(0, 255, 0, 0.5)',
+                'rgba(255, 0, 0, 0.5)'
+            ],
+            borderColor: [
+                'rgba(0, 0, 255, 0.5)',
+                'rgba(0, 255, 0, 0.5)',
+                'rgba(255, 0, 0, 0.5)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: false,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
 }
 
 
