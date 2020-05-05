@@ -157,6 +157,9 @@ async function createChart2() {
     });
 }
 
+chart.getDatasetMeta(1).hidden=false;
+chart.update();
+
 async function DoughnutChart() {
     var ctx = document.getElementById('chartD1').getContext('2d');
     var myChart = new Chart(ctx, {
@@ -164,7 +167,6 @@ async function DoughnutChart() {
     data: {
         labels: ['Total confirmed', 'Recovered', 'Deaths'],
         datasets: [{
-            label: 'Till 4 May',
             data: mylist,
             backgroundColor: [
                 'rgba(0, 0, 255, 0.5)',
@@ -176,11 +178,13 @@ async function DoughnutChart() {
                 'rgba(0, 255, 0, 0.5)',
                 'rgba(255, 0, 0, 0.5)'
             ],
-            borderWidth: 1
+            borderWidth: 1,
+            hidden:false
         }]
     },
     options: {
-        responsive: false,
+        responsive: true,
+        display:true,
         scales: {
             yAxes: [{
                 ticks: {
@@ -191,6 +195,7 @@ async function DoughnutChart() {
     }
 });
 }
+
 
 async function DoughnutChartg() {
     var ctx = document.getElementById('chartD2').getContext('2d');
@@ -211,11 +216,12 @@ async function DoughnutChartg() {
                 'rgba(0, 255, 0, 0.5)',
                 'rgba(255, 0, 0, 0.5)'
             ],
-            borderWidth: 1
+            borderWidth: 1,
+            hidden:false
         }]
     },
     options: {
-        responsive: false,
+        responsive: true,
         scales: {
             yAxes: [{
                 ticks: {
