@@ -21,7 +21,8 @@
 
 
     <center>
-      <h1><img src="iconfinder_01-Virus_5929243.png"> Coronavirus Live</h1><hr style="border: 1px solid black;">
+      <h1 style="font-family: 'Indie Flower', cursive;
+      font-family: 'Arvo', serif;"><img src="iconfinder_01-Virus_5929243.png"> Coronavirus Live</h1><hr style="border: 1px solid black;">
       <i class="fas fa-virus"></i>
       <div class="container">
         <div class="row">
@@ -45,7 +46,7 @@
               <div class="col" id="totdeathsg" style="text-align: center;font-family: 'Indie Flower', cursive;
               font-family: 'Arvo', serif;margin: 5px;color: crimson;"><p></p><hr></div>
             </div>
-            <canvas id="chartD2" width="300" height="300" style="margin-top: 20px;"></canvas>
+            <canvas id="chartD2" width="350" height="300" style="margin-top: 20px;"></canvas>
           </div>
 
           <div class="col" id="box-india" style="margin: 40px; padding: 25px; border: 1px solid rgb(168, 167, 167);padding: 10px;">
@@ -68,7 +69,7 @@
               <div class="col" id="totdeaths" style="text-align: center;font-family: 'Indie Flower', cursive;
               font-family: 'Arvo', serif;margin: 5px;color: crimson;"><p></p><hr></div>
             </div>
-            <canvas id="chartD1" width="300" height="300" style="margin-top: 20px;"></canvas>
+            <canvas id="chartD1" width="300" height="300" style="margin-top: 30px;"></canvas>
           </div>
         </div>
       </div>
@@ -76,12 +77,16 @@
       
       <br>
     <center><h2 style="font-family: 'Indie Flower', cursive;
-      font-family: 'Arvo', serif;">GRAPH - WORLD</h2><small>(till May 4)</small></center>
+      font-family: 'Arvo', serif;">WORLD</h2><small>(till May 4)</small></center>
       <canvas id="chart" width="800" height="500" style="margin-top: 20px;"></canvas>
     <br><hr>
     <center><h2 style="font-family: 'Indie Flower', cursive;
-      font-family: 'Arvo', serif;">GRAPH - INDIA</h2><small>(till May 4)</small></center>
-      <canvas id="chart2" width="800" height="500" style="margin-top: 20px;"></canvas>
+      font-family: 'Arvo', serif;">INDIA</h2><small>(till May 4)</small></center>
+      <canvas id="chart2" width="800" height="500" style="margin-top: 30px;"></canvas>
+      
+      <h2 style="font-family: 'Arvo', serif;margin-top: 40px;">State-wise status</h2>
+      <tabel id="showtable"></table>
+      
       <img src="stayhome.gif" alt="stayhome" style="width: 300px;height: 300px;">
       
       
@@ -90,8 +95,6 @@
       <h1 style="color: orangered;" id="err"></h1>
       <h1 style="color: orangered;" id="err2"></h1>
     </center>
-    
-    
     
     <!-- Optional JavaScript -->
     <script src="app1.js"></script>

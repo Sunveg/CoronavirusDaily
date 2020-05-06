@@ -1,26 +1,20 @@
 const api_url = 'https://coronavirus-19-api.herokuapp.com/countries/India';
 const api_url2 = 'https://coronavirus-19-api.herokuapp.com/all';
+const api_url3 = 'https://api.covid19india.org/data.json';
 function getData() {
     fetch(api_url).then(function(response) {
         return response.json();
     }).then(function(data) {
         
         document.getElementById('totcases').textContent = data.cases;
-        mylist.push(data.cases);
         document.getElementById('totrecov').textContent = data.recovered;
-        mylist.push(data.recovered);
         document.getElementById('totdeaths').textContent = data.deaths;
-        mylist.push(data.deaths);
-        //document.getElementById('updatetime').textContent = 'last updated: ' + data.cases_time_series[pos - 1].date + ' 11:59 pm';
     })
     .catch(function(error) {
         console.log('OH! something went wrong');
         document.getElementById('err').textContent = "Oops! Check system time and try again!";
         document.getElementById('err2').textContent = "Or the data is being updated. Try again after some time :)";
     })
-  //document.getElementById('totcases').textContent = cases_time_series[93].totalconfirmed;
-    //document.getElementById('totrecov').textContent = data.cases_time_series.totalrecovered;
-    //document.getElementById('totdeaths').textContent = obj.cases_time_series.totaldeceased;
 }
 
 function getDatag() {
@@ -29,21 +23,14 @@ function getDatag() {
     }).then(function(datag) {
         
         document.getElementById('totcasesg').textContent = datag.cases;
-        mylistg.push(datag.cases);
         document.getElementById('totrecovg').textContent = datag.recovered;
-        mylistg.push(datag.recovered);
         document.getElementById('totdeathsg').textContent = datag.deaths;
-        mylistg.push(datag.deaths);
-        //document.getElementById('updatetime').textContent = 'last updated: ' + data.cases_time_series[pos - 1].date + ' 11:59 pm';
     })
     .catch(function(error) {
         console.log('OH! something went wrong');
         document.getElementById('err').textContent = "Oops! Check system time and try again!";
         document.getElementById('err2').textContent = "Or the data is being updated. Try again after some time :)";
     })
-  //document.getElementById('totcases').textContent = cases_time_series[93].totalconfirmed;
-    //document.getElementById('totrecov').textContent = data.cases_time_series.totalrecovered;
-    //document.getElementById('totdeaths').textContent = obj.cases_time_series.totaldeceased;
 }
 
 async function getCSV() {
@@ -78,15 +65,69 @@ async function getCSV2() {
 
 
 
+function getDataStates() {
+    fetch(api_url3).then(function(response) {
+        return response.json();
+    }).then(function(data) {
+        console.log(data.statewise[0].state);
+        var tableHead = [];
+        var table = document.createElement("table");
+        var tr = table.insertRow(-1); 
+        tableHead = ['State', 'Confirmed', 'Active', 'Recovered', 'Deaths', 'New cases', 'New recoveries', 'New deceased'];
+        
+        for(var i = 0; i < 8; i++)
+        {
+            var th = document.createElement("th");
+            th.innerHTML = tableHead[i];
+            tr.appendChild(th);
+        }
+
+        for(var j = 1; j < data.statewise.length - 7; j++)
+        {
+            tr = table.insertRow(-1);
+            var tabCell = tr.insertCell(-1);
+            tabCell.innerHTML = data.statewise[j].state;
+            var tabCell = tr.insertCell(-1);
+            tabCell.innerHTML = data.statewise[j].confirmed;
+            var tabCell = tr.insertCell(-1);
+            tabCell.innerHTML = data.statewise[j].active;
+            var tabCell = tr.insertCell(-1);
+            tabCell.innerHTML = data.statewise[j].recovered;
+            var tabCell = tr.insertCell(-1);
+            tabCell.innerHTML = data.statewise[j].deaths;
+            var tabCell = tr.insertCell(-1);
+            tabCell.innerHTML = '<span style="color:#FF0000">+' + data.statewise[j].deltaconfirmed;
+            var tabCell = tr.insertCell(-1);
+            tabCell.innerHTML = '<span style="color:#0F47B6">+' + data.statewise[j].deltarecovered;
+            var tabCell = tr.insertCell(-1);
+            tabCell.innerHTML = '<span style="color:#FF0000">+' + data.statewise[j].deltadeaths;
+        }
+
+        var divContainer = document.getElementById("showtable");
+        divContainer.innerHTML = "";
+        divContainer.appendChild(table);
+        
+        //document.getElementById('totcases').textContent = data.cases;
+        //document.getElementById('totrecov').textContent = data.recovered;
+        //document.getElementById('totdeaths').textContent = data.deaths;
+    })
+    .catch(function(error) {
+        console.log('OH! something went wrong');
+        document.getElementById('err').textContent = "Oops! Check system time and try again!";
+        document.getElementById('err2').textContent = "Or the data is being updated. Try again after some time :)";
+    })
+}
+
+
+
 getData();
-getDatag()
+getDatag();
+getDataStates();
 
 const xlabels = [];
 const ylabels = [];
 const xlabels2 = [];
 const ylabels2 = [];
-const mylist = [];
-const mylistg = [];
 
 createChart();
 createChart2();
@@ -113,7 +154,7 @@ async function createChart() {
             }]
         },
         options: {
-            responsive: true,
+            responsive: false,
             scales: {
                 yAxes: [{
                     ticks: {
@@ -145,7 +186,7 @@ async function createChart2() {
             }]
         },
         options: {
-            responsive: true,
+            responsive: false,
             scales: {
                 yAxes: [{
                     ticks: {
@@ -157,8 +198,6 @@ async function createChart2() {
     });
 }
 
-chart.getDatasetMeta(1).hidden=false;
-chart.update();
 
 async function DoughnutChart() {
     fetch(api_url).then(function(response) {
@@ -176,6 +215,7 @@ async function DoughnutChart() {
                     'rgba(0, 255, 0, 0.5)',
                     'rgba(255, 0, 0, 0.5)'
                 ],
+
                 borderColor: [
                     '#87CEEB',
                     'rgba(0, 255, 0, 0.5)',
