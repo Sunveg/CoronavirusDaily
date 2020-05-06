@@ -161,76 +161,87 @@ chart.getDatasetMeta(1).hidden=false;
 chart.update();
 
 async function DoughnutChart() {
-    var ctx = document.getElementById('chartD1').getContext('2d');
-    var myChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-        labels: ['Total confirmed', 'Recovered', 'Deaths'],
-        datasets: [{
-            data: mylist,
-            backgroundColor: [
-                'rgba(0, 0, 255, 0.5)',
-                'rgba(0, 255, 0, 0.5)',
-                'rgba(255, 0, 0, 0.5)'
-            ],
-            borderColor: [
-                'rgba(0, 0, 255, 0.5)',
-                'rgba(0, 255, 0, 0.5)',
-                'rgba(255, 0, 0, 0.5)'
-            ],
-            borderWidth: 1,
-            hidden:false
-        }]
-    },
-    options: {
-        responsive: true,
-        display:true,
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
+    fetch(api_url).then(function(response) {
+        return response.json();
+    }).then(function(data) {
+        var ctx = document.getElementById('chartD1').getContext('2d');
+        var myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Total confirmed', 'Recovered', 'Deaths'],
+            datasets: [{
+                data: [data.cases, data.recovered, data.deaths],
+                backgroundColor: [
+                    '#87CEEB',
+                    'rgba(0, 255, 0, 0.5)',
+                    'rgba(255, 0, 0, 0.5)'
+                ],
+                borderColor: [
+                    '#87CEEB',
+                    'rgba(0, 255, 0, 0.5)',
+                    'rgba(255, 0, 0, 0.5)'
+                ],
+                borderWidth: 1,
+                hidden:false
             }]
+        },
+        options: {
+            responsive: true,
+            display:true,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
         }
-    }
-});
+    });
+    })
+    
 }
 
 
-async function DoughnutChartg() {
-    var ctx = document.getElementById('chartD2').getContext('2d');
-    var myChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-        labels: ['Total confirmed', 'Recovered', 'Deaths'],
-        datasets: [{
-            label: 'Till 4 May',
-            data: mylistg,
-            backgroundColor: [
-                'rgba(0, 0, 255, 0.5)',
-                'rgba(0, 255, 0, 0.5)',
-                'rgba(255, 0, 0, 0.5)'
-            ],
-            borderColor: [
-                'rgba(0, 0, 255, 0.5)',
-                'rgba(0, 255, 0, 0.5)',
-                'rgba(255, 0, 0, 0.5)'
-            ],
-            borderWidth: 1,
-            hidden:false
-        }]
-    },
-    options: {
-        responsive: true,
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
+function DoughnutChartg() {
+    fetch(api_url2).then(function(response) {
+        return response.json();
+    }).then(function(datag) {
+        var ctx = document.getElementById('chartD2').getContext('2d');
+        var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Total confirmed', 'Recovered', 'Deaths'],
+            datasets: [{
+                label: 'Till 4 May',
+                data: [datag.cases, datag.recovered, datag.deaths],
+                backgroundColor: [
+                    '#87CEEB',
+                    'rgba(0, 255, 0, 0.5)',
+                    'rgba(255, 0, 0, 0.5)'
+                ],
+                borderColor: [
+                    '#87CEEB',
+                    'rgba(0, 255, 0, 0.5)',
+                    'rgba(255, 0, 0, 0.5)'
+                ],
+                borderWidth: 1,
+                hidden:false
             }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
         }
-    }
-});
+    });   
+        
+    })
+    
 }
 
 
