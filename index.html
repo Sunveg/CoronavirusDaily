@@ -3,7 +3,7 @@
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -76,13 +76,22 @@
       <br>
       
       <br>
-    <center><h2 style="font-family: 'Indie Flower', cursive;
-      font-family: 'Arvo', serif;">WORLD</h2><small>(till May 4)</small></center>
-      <canvas id="chart" width="800" height="500" style="margin-top: 20px;"></canvas>
-    <br><hr>
-    <center><h2 style="font-family: 'Indie Flower', cursive;
-      font-family: 'Arvo', serif;">INDIA</h2><small>(till May 4)</small></center>
-      <canvas id="chart2" width="800" height="500" style="margin-top: 30px;"></canvas>
+      <button class="btn" onclick="enableGraphs();this.onclick=null" ondblclick="disableGraphs()">Graphs</button>
+      <br>
+      <small>Tap to enable and double tap to disable</small>
+    <center>
+      <div id="chartglobal">
+        <h2 style="font-family: 'Indie Flower', cursive;
+        font-family: 'Arvo', serif;">WORLD</h2><small>(till May 4)</small></center>
+        <canvas id="chart" width="800" height="500" style="margin-top: 20px;"></canvas>
+        <br><hr>
+      </div>
+    <center>
+      <div id="chartindia">s
+        <h2 id="chart2_text" style="font-family: 'Indie Flower', cursive;
+        font-family: 'Arvo', serif;">INDIA</h2><small id="chart2_texts">(till May 4)</small></center>
+        <canvas id="chart2" width="800" height="500" style="margin-top: 30px;"></canvas>
+      </div>
       
       <h2 style="font-family: 'Arvo', serif;margin-top: 40px;">State-wise status</h2>
       <tabel id="showtable"></table>

@@ -6,6 +6,7 @@ table {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    overflow-x:auto;
   }
   
   td, th {
@@ -19,3 +20,7 @@ table {
   }
 
   tr:hover {background-color: rgb(250, 227, 227);}
+
+  .btn {
+      border: 1px solid black;
+  }

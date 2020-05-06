@@ -118,7 +118,27 @@ function getDataStates() {
     })
 }
 
+function enableGraphs() {
+    createChart();
+    createChart2();
+    document.getElementById('chartglobal').hidden = false;
+    document.getElementById('chartindia').hidden = false;
+    document.getElementById('chart').hidden = false;
+    document.getElementById('chart2').hidden = false;
+}
 
+function disableGraphs() {
+
+    document.getElementById('chartglobal').hidden = true;
+    document.getElementById('chartindia').hidden = true;
+    document.getElementById('chart').hidden = true;
+    document.getElementById('chart2').hidden = true;
+}
+
+document.getElementById('chartglobal').hidden = true;
+document.getElementById('chartindia').hidden = true;
+document.getElementById('chart').hidden = true;
+document.getElementById('chart2').hidden = true;
 
 getData();
 getDatag();
@@ -129,8 +149,7 @@ const ylabels = [];
 const xlabels2 = [];
 const ylabels2 = [];
 
-createChart();
-createChart2();
+
 DoughnutChart();
 DoughnutChartg();
 
