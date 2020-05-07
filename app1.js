@@ -1,21 +1,7 @@
 const api_url = 'https://coronavirus-19-api.herokuapp.com/countries/India';
 const api_url2 = 'https://coronavirus-19-api.herokuapp.com/all';
 const api_url3 = 'https://api.covid19india.org/data.json';
-function getData() {
-    fetch(api_url).then(function(response) {
-        return response.json();
-    }).then(function(data) {
-        
-        document.getElementById('totcases').textContent = data.cases;
-        document.getElementById('totrecov').textContent = data.recovered;
-        document.getElementById('totdeaths').textContent = data.deaths;
-    })
-    .catch(function(error) {
-        console.log('OH! something went wrong');
-        document.getElementById('err').textContent = "Oops! Check system time and try again!";
-        document.getElementById('err2').textContent = "Or the data is being updated. Try again after some time :)";
-    })
-}
+
 
 function getDatag() {
     fetch(api_url2).then(function(response) {
@@ -28,15 +14,15 @@ function getDatag() {
     })
     .catch(function(error) {
         console.log('OH! something went wrong');
-        document.getElementById('err').textContent = "Oops! Check system time and try again!";
+        document.getElementById('err').textContent = "Oops! Check Internet connection and try again!";
         document.getElementById('err2').textContent = "Or the data is being updated. Try again after some time :)";
     })
 }
 
 async function getCSV() {
+
     const response = await fetch('world.csv');
     const datacsv = await response.text();
-
     const table = datacsv.split('\n').slice(1);
     table.forEach(row => {
         const col = row.split(',');
@@ -49,6 +35,7 @@ async function getCSV() {
 }
 
 async function getCSV2() {
+    
     const response = await fetch('india_small.csv');
     const datacsv2 = await response.text();
 
@@ -70,6 +57,9 @@ function getDataStates() {
         return response.json();
     }).then(function(data) {
         console.log(data.statewise[0].state);
+        document.getElementById('totcases').textContent = data.statewise[0].confirmed;
+        document.getElementById('totrecov').textContent = data.statewise[0].recovered;
+        document.getElementById('totdeaths').textContent = data.statewise[0].deaths;
         var tableHead = [];
         var table = document.createElement("table");
         var tr = table.insertRow(-1); 
@@ -82,7 +72,7 @@ function getDataStates() {
             tr.appendChild(th);
         }
 
-        for(var j = 1; j < data.statewise.length - 7; j++)
+        for(var j = 0; j < data.statewise.length - 7; j++)
         {
             tr = table.insertRow(-1);
             var tabCell = tr.insertCell(-1);
@@ -113,12 +103,13 @@ function getDataStates() {
     })
     .catch(function(error) {
         console.log('OH! something went wrong');
-        document.getElementById('err').textContent = "Oops! Check system time and try again!";
+        document.getElementById('err').textContent = "Oops! Check Internet connection and try again!";
         document.getElementById('err2').textContent = "Or the data is being updated. Try again after some time :)";
     })
 }
 
 function enableGraphs() {
+
     createChart();
     createChart2();
     document.getElementById('chartglobal').hidden = false;
@@ -135,19 +126,20 @@ function disableGraphs() {
     document.getElementById('chart2').hidden = true;
 }
 
+
 document.getElementById('chartglobal').hidden = true;
 document.getElementById('chartindia').hidden = true;
 document.getElementById('chart').hidden = true;
 document.getElementById('chart2').hidden = true;
 
-getData();
+//getData();
 getDatag();
 getDataStates();
 
-const xlabels = [];
-const ylabels = [];
-const xlabels2 = [];
-const ylabels2 = [];
+let xlabels = [];
+let ylabels = [];
+let xlabels2 = [];
+let ylabels2 = [];
 
 
 DoughnutChart();
@@ -156,7 +148,7 @@ DoughnutChartg();
 async function createChart() {
     await getCSV();
     const ctx = document.getElementById('chart').getContext('2d');
-    const myChart = new Chart(ctx, {
+    let myChart1 = new Chart(ctx, {
         type: 'line',
         data: {
             labels: xlabels,
@@ -183,12 +175,13 @@ async function createChart() {
             }
         }
     });
+    
 }
 
 async function createChart2() {
     await getCSV2();
     const ctx = document.getElementById('chart2').getContext('2d');
-    const myChart = new Chart(ctx, {
+    const myChart2 = new Chart(ctx, {
         type: 'line',
         data: {
             labels: xlabels2,
@@ -215,11 +208,12 @@ async function createChart2() {
             }
         }
     });
+    
 }
 
 
 async function DoughnutChart() {
-    fetch(api_url).then(function(response) {
+    fetch(api_url3).then(function(response) {
         return response.json();
     }).then(function(data) {
         var ctx = document.getElementById('chartD1').getContext('2d');
@@ -228,7 +222,7 @@ async function DoughnutChart() {
         data: {
             labels: ['Total confirmed', 'Recovered', 'Deaths'],
             datasets: [{
-                data: [data.cases, data.recovered, data.deaths],
+                data: [data.statewise[0].confirmed, data.statewise[0].recovered, data.statewise[0].deaths],
                 backgroundColor: [
                     '#87CEEB',
                     'rgba(0, 255, 0, 0.5)',
@@ -271,7 +265,7 @@ function DoughnutChartg() {
         data: {
             labels: ['Total confirmed', 'Recovered', 'Deaths'],
             datasets: [{
-                label: 'Till 4 May',
+                label: 'Status',
                 data: [datag.cases, datag.recovered, datag.deaths],
                 backgroundColor: [
                     '#87CEEB',

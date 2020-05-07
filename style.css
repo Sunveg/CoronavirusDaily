@@ -2,6 +2,7 @@ table {
     font-family: 'Indie Flower', cursive;
     font-family: 'Arvo', serif;
     border-collapse: collapse;
+    border: 1px black;
     width: 80%;
     margin-left: auto;
     margin-right: auto;
@@ -16,10 +17,19 @@ table {
   }
   
   tr:nth-child(odd) {
-    background-color: rgb(223, 255, 220);
+    background-color: rgb(223, 255, 220) ;
+    
   }
 
-  tr:hover {background-color: rgb(250, 227, 227);}
+  tr:nth-child(2) {
+    background-color: rgb(253, 255, 160);
+  }
+
+  tr:nth-child(1) {
+    background-color: rgb(182, 214, 255);;
+  }
+
+  tr:hover {background-color: rgb(255, 223, 252);}
 
   .btn {
       border: 1px solid black;
